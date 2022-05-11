@@ -13,6 +13,9 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
 
+env:
+  resource_group: logicapp-rg
+  location: "North Europe"
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -32,4 +35,5 @@ jobs:
           creds: ${{ secrets.AZURE_CREDENTIALS}}
 
       - name: Create storage account
-        run: az storage account create -n storagegithubdemodbt -g logicapp-rg -l northeurope --sku Standard_LRS
+        run: az storage account create -n storagegithubdemodbt -g ${{env.resource_group}} -l ${{env.location}} --sku Standard_LRS
+      
